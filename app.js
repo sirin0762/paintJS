@@ -4,6 +4,7 @@ const colors = document.getElementsByClassName("jsColor");
 const range = document.getElementById('jsRange');
 const mode = document.getElementById('jsMode');
 const saveBtn = document.getElementById('jsSave');
+const clearBtn = document.getElementById('jsClear');
 
 const INITIAL_COLOR = '#2c2c2c';
 const CANVAS_SIZE = 700;
@@ -71,12 +72,17 @@ function handleCM(e){
     e.preventDefault();
 }
 
-function saveImage(e){
+function saveImage(){
     const image = canvas.toDataURL('image/png');
     const link = document.createElement('a');
     link.href = image;
     link.download = "PaintJS[EXPORT]";
     link.click();
+}
+
+function clearCanvas(){
+    ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    ctx.beginPath();
 }
 
 function init(){
@@ -104,6 +110,10 @@ function init(){
 
     if(saveBtn){
         saveBtn.addEventListener('click', saveImage);
+    }
+
+    if(clearBtn){
+        clearBtn.addEventListener('click', clearCanvas);
     }
 }
 
